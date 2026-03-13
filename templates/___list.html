@@ -1,0 +1,29 @@
+<div class="listContainer">
+    <h2>My Destinations</h2>
+
+    <div class="destination-list">
+        {% if destinations %}
+            {% for destination in destinations %}
+                <div class="listCard">
+                    <h3>{{ destination.destination_title }}</h3>
+                    <p><strong>Country:</strong> {{ destination.destination_country }}</p>
+                    <p><strong>Location:</strong> {{ destination.destination_location }}</p>
+                    <p><strong>Start:</strong> {{ destination.start_date }}</p>
+                    <p><strong>End:</strong> {{ destination.end_date }}</p>
+
+                    <div class="cardActions">
+                        <a href="/destinations/{{ destination.destination_pk }}">Edit</a>
+                        <button
+                            type="button"
+                            mix-delete="/destinations/{{ destination.destination_pk }}"
+                        >
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No destinations yet.</p>
+        {% endif %}
+    </div>
+</div>

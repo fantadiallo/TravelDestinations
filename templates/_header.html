@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/app.css">
+    <script src="/static/mixhtml.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    
+<div class="tooltip"></div>
+<nav>
+    <a href="/"></a>
+    <a href="/signup">signup</a>
+    <a href="/login">login</a>
+   
+    {% if not user %}
+      <a href="/login">Login</a>
+    {% else %}
+    <a href="/logout">Logout</a>
+    {% endif %}
+</nav>

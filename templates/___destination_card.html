@@ -1,0 +1,34 @@
+<div class="listCard" id="destination-{{ destination.destination_pk }}">
+
+    <div class="cardHeader">
+        <h3>{{ destination.destination_title }}</h3>
+    </div>
+
+    <div class="cardBody">
+        <p><strong>Country:</strong> {{ destination.destination_country }}</p>
+        <p><strong>Location:</strong> {{ destination.destination_location }}</p>
+        <p><strong>Start:</strong> {{ destination.start_date }}</p>
+        <p><strong>End:</strong> {{ destination.end_date }}</p>
+    </div>
+
+    <div class="cardActions">
+        <button
+            type="button"
+            mix-get="/destinations/{{ destination.destination_pk }}/edit"
+            mix-target="#destination-{{ destination.destination_pk }}"
+            mix-swap="outerHTML"
+        >
+            Edit
+        </button>
+
+        <button
+            type="button"
+            mix-delete="/destinations/{{ destination.destination_pk }}"
+            mix-target="#destination-{{ destination.destination_pk }}"
+            mix-swap="outerHTML"
+        >
+            Delete
+        </button>
+    </div>
+
+</div>

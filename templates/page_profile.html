@@ -1,0 +1,23 @@
+{% include "_header.html" %}
+<main>
+<section class="profile">
+    <div class="profileContainer">
+          <h1>Profile</h1>
+         <p>First name: {{ user.user_first_name }}</p>
+        <p>Last name: {{ user.user_last_name }}</p>
+        <p>Email: {{ user.user_email }}</p>
+
+    </div>
+    </section>
+    <section class="destinations">
+
+    {% include "___form_destinations.html" %}
+ </section>
+
+<section class="destination-list">
+    {% include "___list.html" %}
+</section>
+
+</main>
+{% include "_footer.html" %}
+    

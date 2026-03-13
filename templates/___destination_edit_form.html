@@ -1,0 +1,65 @@
+<div class="listCard" id="destination-{{ destination.destination_pk }}">
+
+    <form mix-patch="/destinations/{{ destination.destination_pk }}">
+
+        <div>
+            <label for="title-{{ destination.destination_pk }}">Title</label>
+            <input
+                name="destination_title"
+                id="title-{{ destination.destination_pk }}"
+                type="text"
+                value="{{ destination.destination_title }}"
+                mix-validate="{{ x.REGEX_DESTINATION_TITLE }}"
+            >
+        </div>
+
+        <div>
+            <label for="country-{{ destination.destination_pk }}">Country</label>
+            <input
+                name="destination_country"
+                id="country-{{ destination.destination_pk }}"
+                type="text"
+                value="{{ destination.destination_country }}"
+                mix-validate="{{ x.REGEX_DESTINATION_COUNTRY }}"
+            >
+        </div>
+
+        <div>
+            <label for="location-{{ destination.destination_pk }}">Location</label>
+            <input
+                name="destination_location"
+                id="location-{{ destination.destination_pk }}"
+                type="text"
+                value="{{ destination.destination_location }}"
+                mix-validate="{{ x.REGEX_DESTINATION_LOCATION }}"
+            >
+        </div>
+
+        <div>
+            <label for="start-{{ destination.destination_pk }}">Start</label>
+            <input
+                name="start_date"
+                id="start-{{ destination.destination_pk }}"
+                type="date"
+                value="{{ destination.start_date }}"
+            >
+        </div>
+
+        <div>
+            <label for="end-{{ destination.destination_pk }}">End</label>
+            <input
+                name="end_date"
+                id="end-{{ destination.destination_pk }}"
+                type="date"
+                value="{{ destination.end_date }}"
+            >
+        </div>
+
+        <div class="cardActions">
+            <button>Update</button>
+            <button type="button" mix-delete="/destinations/{{ destination.destination_pk }}">Delete</button>
+        </div>
+
+    </form>
+
+</div>

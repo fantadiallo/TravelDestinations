@@ -21,14 +21,14 @@
             Edit
         </button>
 
-        <button
-            type="button"
-            mix-delete="/destinations/{{ destination.destination_pk }}"
-            mix-target="#destination-{{ destination.destination_pk }}"
-            mix-swap="outerHTML"
-        >
-            Delete
-        </button>
+     <button
+     type="button"
+     onclick="return confirm('Delete this destination?')"
+     mix-delete="/destinations/{{ destination.destination_pk }}"
+     mix-target="#destination-{{ destination.destination_pk }}"
+     mix-swap="outerHTML">
+Delete
+</button>
     </div>
 
 </div>

@@ -345,6 +345,7 @@ def update_destinations(destination_pk):
 
 ########################################
 @app.get("/destinations/<destination_pk>")
+@x.no_cache
 def show_edit_destination(destination_pk):
     try:
         user = session.get("user", "")

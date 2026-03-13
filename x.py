@@ -80,7 +80,7 @@ REGEX_DESTINATION_TITLE = f"^.{{{DESTINATION_TITLE_MIN },{DESTINATION_TITLE_MAX}
 def validate_destination_title():
     destination_title = request.form.get("destination_title", "").strip()
     if not re.match(REGEX_DESTINATION_TITLE, destination_title):
-        raise Exception("company_exeption destination_title")
+        raise Exception("company_exception destination_title")
     return destination_title
 
 ####################################################
@@ -90,7 +90,7 @@ REGEX_DESTINATION_COUNTRY = f"^.{{{DESTINATION_COUNTRY_MIN },{DESTINATION_COUNTR
 def validate_destination_country():
     destination_country = request.form.get("destination_country", "").strip()
     if not re.match(REGEX_DESTINATION_COUNTRY, destination_country):
-        raise Exception("company_exeption destination_country")
+        raise Exception("company_exception destination_country")
     return destination_country
 
 ######################################
@@ -101,7 +101,7 @@ REGEX_DESTINATION_LOCATION = f"^.{{{DESTINATION_LOCATION_MIN },{DESTINATION_LOCA
 def validate_destination_location():
     destination_location = request.form.get("destination_location", "").strip()
     if not re.match(REGEX_DESTINATION_LOCATION, destination_location):
-        raise Exception("company_exeption destination_location")
+        raise Exception("company_exception destination_location")
     return destination_location
 
 ####################################

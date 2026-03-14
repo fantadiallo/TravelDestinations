@@ -163,3 +163,11 @@ footer{
     grid-template-columns: 1fr;
   }
 }
+.listCard {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.listCard.is-deleting {
+    opacity: 0;
+    transform: translateY(-10px);
+}

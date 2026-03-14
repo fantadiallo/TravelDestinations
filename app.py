@@ -174,6 +174,12 @@ def create_destination():
         destination_location = x.validate_destination_location()
         start_date = x.validate_start_date()
         end_date = x.validate_end_date()
+
+        if start_date > end_date:
+            error_message = "Start date must be before end date"
+            ___tip = render_template("___tip.html", status="error", message=error_message)
+            return f"""<browser mix-after-begin="#tooltip">{___tip}</browser>""", 400
+      
         destination_pk = uuid.uuid4().hex
         user_fk = user["user_pk"]
 
@@ -192,34 +198,35 @@ def create_destination():
             end_date
         ))
         db.commit()
+        
 
         return '<browser mix-redirect="/profile"></browser>'
 
     except Exception as ex:
         ic(ex)
 
-        if "company_exception destination_title" in str(ex):
-            error_message = "Destination title invalid"
+        if  "company_exception destination_title" in str(ex):
+            error_message = f"Destination title must be {x.DESTINATION_TITLE_MIN} to {x.DESTINATION_TITLE_MAX} characters"
             ___tip = render_template("___tip.html", status="error", message=error_message)
             return f"""<browser mix-after-begin="#tooltip">{___tip}</browser>""", 400
 
         if "company_exception destination_country" in str(ex):
-            error_message = "Destination country invalid"
+            error_message = f"Destination country must be {x.DESTINATION_COUNTRY_MIN} TO {x.DESTINATION_COUNTRY_MAX}"
             ___tip = render_template("___tip.html", status="error", message=error_message)
             return f"""<browser mix-after-begin="#tooltip">{___tip}</browser>""", 400
 
         if "company_exception destination_location" in str(ex):
-            error_message = "Destination location invalid"
+            error_message = f"Destination location must be {x.DESTINATION_LOCATION_MIN} to {x.DESTINATION_LOCATION_MAX}"
             ___tip = render_template("___tip.html", status="error", message=error_message)
             return f"""<browser mix-after-begin="#tooltip">{___tip}</browser>""", 400
 
         if "company_exception start_date" in str(ex):
-            error_message = "Start date invalid"
+            error_message = f"Start date must be before end date"
             ___tip = render_template("___tip.html", status="error", message=error_message)
             return f"""<browser mix-after-begin="#tooltip">{___tip}</browser>""", 400
 
         if "company_exception end_date" in str(ex):
-            error_message = "End date invalid"
+            error_message = "End date must be after start date"
             ___tip = render_template("___tip.html", status="error", message=error_message)
             return f"""<browser mix-after-begin="#tooltip">{___tip}</browser>""", 400
 
@@ -257,25 +264,32 @@ def show_profile():
 @app.delete("/destinations/<destination_pk>")
 def delete_destination(destination_pk):
     try:
-        user = session.get("user", "")
+        user = session.get("user")
         if not user:
-            return '<browser mix-redirect="/login"></browser>'
+            return '<browser mix-redirect="/login"></browser>', 401
 
         db, cursor = x.db()
+
         q = "DELETE FROM destinations WHERE destination_pk = %s AND user_fk = %s"
         cursor.execute(q, (destination_pk, user["user_pk"]))
         db.commit()
 
-        return f'''
-            <browser mix-remove="#destination-{destination_pk}" mix-fade-2000></browser>
-        '''
+        ___tip = render_template("___tip.html", status="success", message="Destination deleted")
+
+        return f"""
+        <browser mix-remove="#destination-{destination_pk}" mix-fade-2000></browser>
+        <browser mix-after-begin="#tooltip">{___tip}</browser>
+        """
+
     except Exception as ex:
         ic(ex)
-        return "system under maintenance", 500
-    finally:
-        if "cursor" in locals(): cursor.close()
-        if "db" in locals(): db.close()
+        return "error", 500
 
+    finally:
+        if "cursor" in locals():
+            cursor.close()
+        if "db" in locals():
+            db.close()
 
 ################################
 @app.patch("/destinations/<destination_pk>")
@@ -312,6 +326,12 @@ def update_destinations(destination_pk):
         if end_date:
             parts.append("end_date = %s")
             values.append(end_date)
+            
+        if start_date > end_date:
+           error_message = "Start date must be before end date"
+           ___tip = render_template("___tip.html", status="error", message=error_message)
+           return f"""<browser mix-after-begin="#tooltip">{___tip}</browser>""", 400
+        
 
         if not parts:
             return """
@@ -333,11 +353,36 @@ def update_destinations(destination_pk):
 
     except Exception as ex:
         ic(ex)
-        return """
-            <browser mix-replace="#mix-message">
-                system under maintenance
-            </browser>
-        """, 500
+        if  "company_exception destination_title" in str(ex):
+            error_message = f"Destination title must be {x.DESTINATION_TITLE_MIN} to {x.DESTINATION_TITLE_MAX} characters"
+            ___tip = render_template("___tip.html", status="error", message=error_message)
+            return f"""<browser mix-after-begin="#tooltip">{___tip}</browser>""", 400
+
+        if "company_exception destination_country" in str(ex):
+            error_message = f"Destination country must be {x.DESTINATION_COUNTRY_MIN} to {x.DESTINATION_COUNTRY_MAX}"
+            ___tip = render_template("___tip.html", status="error", message=error_message)
+            return f"""<browser mix-after-begin="#tooltip">{___tip}</browser>""", 400
+
+        if "company_exception destination_location" in str(ex):
+            error_message = f"Destination location must be {x.DESTINATION_LOCATION_MIN} to {x.DESTINATION_LOCATION_MAX}"
+            ___tip = render_template("___tip.html", status="error", message=error_message)
+            return f"""<browser mix-after-begin="#tooltip">{___tip}</browser>""", 400
+        
+
+        if "company_exception start_date" in str(ex):
+            error_message = f"Start date must be before end date"
+            ___tip = render_template("___tip.html", status="error", message=error_message)
+            return f"""<browser mix-after-begin="#tooltip">{___tip}</browser>""", 400
+
+        if "company_exception end_date" in str(ex):
+            error_message = "End date must be after start date"
+            ___tip = render_template("___tip.html", status="error", message=error_message)
+            return f"""<browser mix-after-begin="#tooltip">{___tip}</browser>""", 400
+
+        error_message = "System under maintenance"
+        ___tip = render_template("___tip.html", status="error", message=error_message)
+        return f"""<browser mix-after-begin="#tooltip">{___tip}</browser>""", 500
+
 
     finally:
         if "cursor" in locals(): cursor.close()
@@ -366,4 +411,4 @@ def show_edit_destination(destination_pk):
 
     finally:
         if "cursor" in locals(): cursor.close()
-        if "db" in locals(): db.close()
+        if "db" in locals(): db.close() 

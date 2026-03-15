@@ -1,13 +1,13 @@
 <div class="listContainer">
     <h2>My Destinations</h2>
 
-    <div class="destination-list" id="destination-list">
-        {% if destinations %}
-            {% for destination in destinations %}
-                {% include "___destination_card.html" %}
-            {% endfor %}
-        {% else %}
-            <p>No destinations yet.</p>
-        {% endif %}
-    </div>
+   <div class="destination-list" id="destination-list">
+    {% if destinations %}
+        {% for destination in destinations %}
+            {% include "___destination_card.html" %}
+        {% endfor %}
+    {% else %}
+        <p>No destinations yet.</p>
+    {% endif %}
+</div>
 </div>

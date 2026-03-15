@@ -160,6 +160,18 @@ def api_login():
  
 ##############################
 
+@app.get("/logout")
+def logout():
+    try:
+        session.clear()
+        return redirect("/login")
+    except Exception as ex:
+        ic(ex)
+        return "ups"
+    finally:
+        if "cursor" in locals(): cursor.close()
+        if "db" in locals(): db.close()
+    
 
 ######################
 @app.post("/api-create-destination")

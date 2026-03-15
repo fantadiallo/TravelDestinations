@@ -1,173 +1,288 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body{
-    width: 100%;
-    height: 100vh;
-}
-#tooltip{
-    position: fixed;
-    z-index: 10;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    .ok{
-        background-color: green;
-    }
-    span {
-        padding: 1rem 2rem;
-    }
-    .error{
-        background-color: red;
-    }
-}
-nav{
-    width: 100%;
-    height: 3rem;
-    background-color: gray;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    a{
-        color: white;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#items{
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: 10fr 4fr;
-    #left{
-
-    }
-    #right{
-        padding: 1rem;
-        border-left: 1px solid black;
-        box-shadow: 0px 0px 10px black;
-    }
+html {
+  font-family: Arial, sans-serif;
 }
 
-
-.user{
-    padding: 1rem;
-}
-
-
-
-footer{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 0.5rem;
-    background-color: gray;
-}
-
-.listContainer{
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
-
-  h2{
-    margin-bottom: 20px;
-  }
-}
-
-.destination-list{
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-
-.listCard{
-  background: #ffffff;
-  border: 1px solid #e5e5e5;
-  border-radius: 10px;
-  padding: 18px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-
+body {
+  min-height: 100vh;
+  background-color: #fff8f2;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  &:hover{
-    transform: translateY(-3px);
-    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
-  }
+  color: #2f1b12;
 }
 
-.cardHeader{
-  h3{
-    margin-bottom: 12px;
-    font-size: 18px;
-  }
+a {
+  text-decoration: none;
 }
 
-.cardBody{
-  p{
-    margin: 6px 0;
-    font-size: 14px;
-  }
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem 5rem;
 }
 
-.cardActions{
+#tooltip {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  width: calc(100% - 2rem);
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#tooltip .error,
+#tooltip .ok,
+#tooltip .success {
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+#tooltip .error {
+  background-color: #d9534f;
+}
+
+#tooltip .ok,
+#tooltip .success {
+  background-color: #2e8b57;
+}
+
+header {
+  width: 100%;
+  background-color: #b8611b;
+  padding: 1rem;
+}
+
+nav {
+  max-width: 1100px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  margin-top: 16px;
-
-  button{
-    padding: 6px 14px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-
-  button:first-child{
-    background: #4a90e2;
-    color: white;
-  }
-
-  button:last-child{
-    background: #e74c3c;
-    color: white;
-  }
+  align-items: center;
+  gap: 1rem;
 }
 
-.noDestinations{
-  margin-top: 20px;
-  font-style: italic;
+.logo a {
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 
-/* responsive */
-
-@media (max-width: 1100px){
-  .destination-list{
-    grid-template-columns: repeat(3, 1fr);
-  }
+.navlinks {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-@media (max-width: 800px){
-  .destination-list{
+.navlinks a {
+  color: white;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+}
+
+.navlinks a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.profileContainer,
+form,
+.editDestination,
+.listContainer {
+  background-color: white;
+  border: 1px solid #eed3bf;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.profile {
+  margin-bottom: 2rem;
+}
+
+.profileContainer h1,
+.editDestination h1,
+.listContainer h2 {
+  margin-bottom: 1rem;
+  color: #8d4713;
+}
+
+.profileContainer p {
+  margin-bottom: 0.5rem;
+}
+
+.destinations {
+  margin-bottom: 2rem;
+}
+
+form {
+  max-width: 500px;
+  display: grid;
+  margin: 2rem auto;
+}
+
+
+form div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+label {
+  font-weight: bold;
+  color: #7c3f14;
+  font-size: 0.95rem;
+}
+
+label span {
+  font-weight: normal;
+  font-size: 0.8rem;
+  color: #8d6a55;
+}
+
+input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid #d8b49a;
+  border-radius: 8px;
+  background-color: #fffdfa;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #c96f26;
+  box-shadow: 0 0 0 3px rgba(201, 111, 38, 0.15);
+}
+
+button {
+  border: none;
+  background-color: #c96f26;
+  color: white;
+  padding: 0.9rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #a95719;
+}
+
+.destination-list {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.listCard {
+  background-color: #fffaf6;
+  border: 1px solid #ecd5c3;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  transition: 0.3s ease;
+}
+
+.listCard:hover {
+  transform: translateY(-3px);
+}
+
+.listCard h3 {
+  margin-bottom: 0.75rem;
+  color: #8d4713;
+}
+
+.listCard p {
+  margin-bottom: 0.4rem;
+  color: #4b2d1d;
+  font-size: 0.95rem;
+}
+
+.cardActions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.cardActions a,
+.cardActions button {
+  flex: 1;
+  text-align: center;
+}
+
+.cardActions a {
+  display: inline-block;
+  background-color: #f3e0d2;
+  color: #8d4713;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.cardActions a:hover {
+  background-color: #ead0bc;
+}
+
+.cardActions button {
+  background-color: #d9534f;
+}
+
+.cardActions button:hover {
+  background-color: #bb3f3b;
+}
+
+.listCard.is-deleting {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+footer {
+  width: 100%;
+  height: 10px;
+  background-color: #b8611b;
+  margin-top: 3rem;
+}
+
+@media (max-width: 900px) {
+  .destination-list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 500px){
-  .destination-list{
+@media (max-width: 650px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navlinks {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .navlinks a {
+    width: 100%;
+  }
+
+  .destination-list {
     grid-template-columns: 1fr;
   }
-}
-.listCard {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
 
-.listCard.is-deleting {
-    opacity: 0;
-    transform: translateY(-10px);
+  .cardActions {
+    flex-direction: column;
+  }
 }

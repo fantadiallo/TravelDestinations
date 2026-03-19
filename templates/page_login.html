@@ -1,31 +1,41 @@
 {% include "_header.html" %}
 
 <main>
-    <form mix-post="/api-login" autocomplete="off">
-        
-        <div>
-            <label for="">
-                Email
-            </label>
-            <input name="user_email" type="text" placeholder="user email" value="" 
-            mix-validate="{{x.REGEX_USER_EMAIL}}">
-        </div>
 
-        <div>
-            <label for="">
-                Password <span>{{ x.USER_PASSWORD_MIN }} to {{ x.USER_PASSWORD_MAX }} characters</span>
-            </label>
-            <input name="user_password" type="text" placeholder="user password" value="" 
-            mix-validate="{{x.REGEX_USER_PASSWORD}}">
-        </div>
+  <div class="LoginHero">
+    <form id="loginForm" class="loginForm" mix-post="/api-login" autocomplete="off">
 
+      <div class="formGroup">
+        <label>Email</label>
+        <input
+          name="user_email"
+          type="text"
+          placeholder="user email"
+          mix-validate="{{x.REGEX_USER_EMAIL}}"
+        >
+      </div>
 
+      <div class="formGroup">
+        <label>
+          Password <span>{{ x.USER_PASSWORD_MIN }} to {{ x.USER_PASSWORD_MAX }} characters</span>
+        </label>
+        <input
+          name="user_password"
+          type="password"
+          placeholder="user password"
+          mix-validate="{{x.REGEX_USER_PASSWORD}}"
+        >
+      </div>
 
-        <button>
-            Login
-        </button>
+      <button type="submit">Login</button>
+
+      <p class="signupText">
+        Don’t have an account? <a href="/signup">Signup</a>
+      </p>
+
     </form>
+  </div>
+
 </main>
 
 {% include "_footer.html" %}
-    
